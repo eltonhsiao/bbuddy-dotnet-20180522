@@ -8,23 +8,30 @@ namespace GOOS_Sample.Models
 
         public long Amount { get; set; }
 
+        public int Year
+        {
+            get
+            {
+                return Convert.ToInt32(YearMonth.Substring(0, 4));
+            }
+        }
+
         public int Month
         {
             get { return Convert.ToInt32(YearMonth.Substring(YearMonth.Length - 2)); }
-        }
-
-        public decimal AverageBudget
-        {
-            get { return (decimal)Amount / DaysInMonth; }
         }
 
         public int DaysInMonth
         {
             get
             {
-                var year = Convert.ToInt32(YearMonth.Substring(0, 4));
-                return DateTime.DaysInMonth(year, Month);
+                return DateTime.DaysInMonth(Year, Month);
             }
+        }
+
+        public decimal AverageBudget
+        {
+            get { return (decimal)Amount / DaysInMonth; }
         }
     }
 }
