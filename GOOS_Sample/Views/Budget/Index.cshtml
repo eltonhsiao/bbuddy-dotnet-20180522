@@ -1,5 +1,20 @@
-﻿@{
+﻿@model IEnumerable<GOOS_Sample.Models.Budget>
+@{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+@Html.ActionLink("Add Budget", "Add", "Budget")
+<table>
+    <tr>
+        <td>Month</td>
+        <td>Amount</td>
+    </tr>
+    @foreach (var budget in Model)
+    {
+        <tr>
+            <td>@budget.YearMonth</td>
+            <td>@budget.Amount</td>
+        </tr>
+    }
+</table>

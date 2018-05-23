@@ -16,7 +16,6 @@ namespace GOOS_SampleTests.Steps
         [Given(@"go to adding budget page")]
         public void GivenGoToAddingBudgetPage()
         {
-            I.Open("http://localhost/Budget/Add");
         }
 
         [Given(@"Budget table existed budgets")]
@@ -28,7 +27,8 @@ namespace GOOS_SampleTests.Steps
         [When(@"I add a buget (.*) for ""(.*)""")]
         public void WhenIAddABugetFor(int p0, string p1)
         {
-            ScenarioContext.Current.Pending();
+            I.Open("http://localhost:58527/Budget/Add")
+                .Assert.Exists("#yearmonth");
         }
 
         [Then(@"it should display ""(.*)""")]

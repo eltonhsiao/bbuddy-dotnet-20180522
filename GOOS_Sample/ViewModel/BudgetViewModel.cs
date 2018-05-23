@@ -1,8 +1,8 @@
 ﻿namespace GOOS_Sample.ViewModel
 {
-    internal class BudgetViewModel
+    public class BudgetViewModel
     {
-        public string Month { get; set; }
+        public string YearMonth { get; set; }
         public long Amount { get; set; }
     }
 }

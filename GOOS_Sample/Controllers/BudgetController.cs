@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using GOOS_Sample.Interface;
 using GOOS_Sample.Models;
+using GOOS_Sample.Services;
 using GOOS_Sample.ViewModel;
 
 namespace GOOS_Sample.Controllers
@@ -13,9 +14,12 @@ namespace GOOS_Sample.Controllers
     {
         public IGOOSRepo GOOSRepo { get; set; }
 
+        public BudgetService BudgetService { get; set; }
+
         public ActionResult Index()
         {
-            return View();
+            var result = GOOSRepo.GetAllBudgets();
+            return View(result);
         }
 
         // GET: Budgets
@@ -25,10 +29,31 @@ namespace GOOS_Sample.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Budgets budget)
+        public ActionResult Add(Budget budget)
         {
-            GOOSRepo.SaveBudget(budget);
+            GOOSRepo.AddBudget(budget);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Update(Budget budget)
+        {
+            GOOSRepo.UpdateBudget(budget);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Get(DateRange dateRange)
+        {
+            var budgetList = GOOSRepo.GetTotalBudgetByTimeRange(dateRange);
+            BudgetService.CalculateTotalBudget(dateRange, budgetList);
+            return null;
+        }
+    }
+
+    public class DateRange
+    {
+        public DateTime Start { get; set; }
+
+        public DateTime End { get; set; }
     }
 }

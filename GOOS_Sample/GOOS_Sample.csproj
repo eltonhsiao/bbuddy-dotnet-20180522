@@ -198,11 +198,13 @@
     </Compile>
     <Compile Include="Interface\IGOOSRepo.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Budgets.cs" />
+    <Compile Include="Models\Budget.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GOOSRepo.cs" />
+    <Compile Include="Services\BudgetService.cs" />
+    <Compile Include="Services\IBudgetService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\BudgetViewModel.cs" />
   </ItemGroup>

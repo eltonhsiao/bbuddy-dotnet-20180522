@@ -89,7 +89,9 @@
   <ItemGroup>
     <Compile Include="Controller\BudgetControllerTest.cs" />
     <Compile Include="Controller\ControllerBaseTest.cs" />
+    <Compile Include="Helper\ControllerMockHelper.cs" />
     <Compile Include="Helper\ControllerTestHelper.cs" />
+    <Compile Include="Services\BudgetServiceTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

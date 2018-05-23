@@ -1,8 +1,8 @@
 ﻿namespace GOOS_Sample.Models
 {
-    public class Budgets
+    public class Budget
     {
-        public string Month { get; set; }
+        public string YearMonth { get; set; }
 
         public long Amount { get; set; }
     }
