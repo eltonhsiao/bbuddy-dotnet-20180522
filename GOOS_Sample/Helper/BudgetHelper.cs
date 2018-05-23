@@ -20,7 +20,12 @@ namespace GOOS_Sample.Helper
                 var daysInMonth = DateTime.DaysInMonth(year, month);
                 var averageEachDay = (decimal)b.Amount / daysInMonth;
                 int totalDay;
-                if (dateRange.Start.Month == dateRange.End.Month)
+
+                if (dateRange.Start.Month > b.Month || dateRange.End.Month < b.Month)
+                {
+                    totalDay = 0;
+                }
+                else if (dateRange.Start.Month == dateRange.End.Month)
                 {
                     totalDay = (dateRange.End.Day - dateRange.Start.Day + 1);
                 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GOOS_Sample.Controllers;
-using GOOS_Sample.Helper;
+﻿using GOOS_Sample.Helper;
 using GOOS_Sample.Models;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GOOS_Sample.UnitTests
 {
@@ -19,13 +16,40 @@ namespace GOOS_Sample.UnitTests
         public void Query_Whole_Month()
         {
             MakeBudgetList(MakeBudget("2018-04", 600));
+            AmountShouldBe(600, "2018-04-01", "2018-04-30");
+        }
 
-            Assert.AreEqual(600, Calculate("2018-04-01", "2018-04-30"));
+        [Test]
+        public void no_overlap_after()
+        {
+            MakeBudgetList(MakeBudget("2018-04", 600));
+            AmountShouldBe(0, "2018-05-01", "2018-05-30");
+        }
+
+        [Test]
+        public void no_overlap_before()
+        {
+            MakeBudgetList(MakeBudget("2018-04", 600));
+            AmountShouldBe(0, "2018-03-01", "2018-03-30");
+        }
+
+        [Test]
+        public void different_year()
+        {
+            MakeBudgetList(MakeBudget("2018-04", 600));
+            AmountShouldBe(0, "2017-04-01", "2017-04-30");
+        }
+
+        private void AmountShouldBe(int expected, string start, string end)
+        {
+            Assert.AreEqual(expected, Calculate(start, end));
         }
 
         [Test]
         public void StartDate_And_EndDate_Are_Diff_Month()
         {
+            MakeBudgetList(MakeBudget("2018-04", 600), MakeBudget("2018-05", 620));
+
             var dateRange = new DateRange
             {
                 Start = Convert.ToDateTime("2018-04-15"),
