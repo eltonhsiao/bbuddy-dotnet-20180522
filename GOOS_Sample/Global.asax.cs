@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GOOS_Sample.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,9 @@ namespace GOOS_Sample
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            var container = AutofacConfig.RegisterIoc();
+
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
