@@ -12,7 +12,7 @@ namespace GOOS_Sample.Factories
         //private static Lazy<IGOOSRepo> goosRepo = new Lazy<IGOOSRepo>(
         //    () =>
         //    {
-        //        var dbContext = TiDbContextFactory.GetDbConfig(DbRole.VirtualSportsDb);
+        //
 
         //        return new GOOSRepo(dbContext);
         //    });

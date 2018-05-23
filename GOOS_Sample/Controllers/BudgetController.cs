@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GOOS_Sample.Helper;
 using GOOS_Sample.Interface;
 using GOOS_Sample.Models;
 using GOOS_Sample.Services;
@@ -45,15 +45,8 @@ namespace GOOS_Sample.Controllers
         public ActionResult Get(DateRange dateRange)
         {
             var budgetList = GOOSRepo.GetTotalBudgetByTimeRange(dateRange);
-            BudgetService.CalculateTotalBudget(dateRange, budgetList);
+            BudgetHelper.CalculateTotalBudget(dateRange, budgetList);
             return null;
         }
-    }
-
-    public class DateRange
-    {
-        public DateTime Start { get; set; }
-
-        public DateTime End { get; set; }
     }
 }

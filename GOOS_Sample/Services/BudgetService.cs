@@ -11,10 +11,5 @@ namespace GOOS_Sample.Services
     public class BudgetService : IBudgetService
     {
         public IGOOSRepo GOOSRepo { get; set; }
-
-        public decimal CalculateTotalBudget(DateRange dateRange, List<Budget> budgetList)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

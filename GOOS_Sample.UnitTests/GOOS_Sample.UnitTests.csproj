@@ -87,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BudgetHelperTests.cs" />
     <Compile Include="Controller\BudgetControllerTest.cs" />
     <Compile Include="Controller\ControllerBaseTest.cs" />
     <Compile Include="Helper\ControllerMockHelper.cs" />

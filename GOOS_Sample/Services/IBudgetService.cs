@@ -9,6 +9,5 @@ namespace GOOS_Sample.Services
 {
     public interface IBudgetService
     {
-        decimal CalculateTotalBudget(DateRange dateRange, List<Budget> budgetList);
     }
 }
