@@ -14,7 +14,7 @@ namespace GOOS_Sample.Controllers
     {
         public IGOOSRepo GOOSRepo { get; set; }
 
-        public BudgetService BudgetService { get; set; }
+        public BudgetHelper BudgetHelper { get; set; }
 
         public ActionResult Index()
         {

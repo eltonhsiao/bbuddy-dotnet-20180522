@@ -9,7 +9,7 @@ namespace GOOS_Sample.Helper
 {
     public class BudgetHelper
     {
-        public static decimal CalculateTotalBudget(DateRange dateRange, List<Budget> budgetList)
+        public decimal CalculateTotalBudget(DateRange dateRange, List<Budget> budgetList)
         {
             decimal totalBudget = 0;
 
@@ -21,7 +21,7 @@ namespace GOOS_Sample.Helper
             return totalBudget;
         }
 
-        private static int GetTotalDay(DateRange dateRange, Budget b)
+        private int GetTotalDay(DateRange dateRange, Budget b)
         {
             int totalDay;
             if (dateRange.Start.Month == dateRange.End.Month)

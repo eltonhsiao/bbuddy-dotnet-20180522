@@ -57,11 +57,14 @@ namespace GOOS_Sample.UnitTests
     [TestFixture]
     public class BudgetHelperTests
     {
+        private BudgetHelper _budgetHelper;
+
         private BudgetBuilder _budgetBuilder;
 
         [SetUp]
         public void SetUp()
         {
+            _budgetHelper = new BudgetHelper();
             _budgetBuilder = new BudgetBuilder();
         }
 
@@ -133,7 +136,7 @@ namespace GOOS_Sample.UnitTests
 
         private decimal Calculate(string start, string end)
         {
-            return BudgetHelper.CalculateTotalBudget(
+            return _budgetHelper.CalculateTotalBudget(
                 MakeDateRange(start, end), _budgetBuilder.BudgetList);
         }
 
