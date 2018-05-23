@@ -18,22 +18,24 @@ namespace GOOS_Sample.Helper
                 var month = Convert.ToInt32(b.YearMonth.Substring(b.YearMonth.Length - 2));
                 var year = Convert.ToInt32(b.YearMonth.Substring(0, 4));
                 var daysInMonth = DateTime.DaysInMonth(year, month);
+                var startOfBudget = DateTime.ParseExact(b.YearMonth + "-01", "yyyy-MM-dd", null);
+                var endOfBudget = DateTime.ParseExact(b.YearMonth + "-" + daysInMonth, "yyyy-MM-dd", null);
                 var averageEachDay = (decimal)b.Amount / daysInMonth;
                 int totalDay;
 
-                if (dateRange.Start.Month > b.Month || dateRange.End.Month < b.Month)
+                if (dateRange.Start > endOfBudget || dateRange.End < startOfBudget)
                 {
                     totalDay = 0;
                 }
-                else if (dateRange.Start.Month == dateRange.End.Month)
+                else if (dateRange.Start.ToString("yyyyMM") == dateRange.End.ToString("yyyyMM"))
                 {
                     totalDay = (dateRange.End.Day - dateRange.Start.Day + 1);
                 }
-                else if (dateRange.Start.Month == Convert.ToInt32(month))
+                else if (dateRange.Start.ToString("yyyyMM") == startOfBudget.ToString("yyyyMM"))
                 {
                     totalDay = (daysInMonth - dateRange.Start.Day + 1);
                 }
-                else if (dateRange.End.Month == Convert.ToInt32(month))
+                else if (dateRange.End.ToString("yyyyMM") == startOfBudget.ToString("yyyyMM"))
                 {
                     totalDay = dateRange.End.Day;
                 }

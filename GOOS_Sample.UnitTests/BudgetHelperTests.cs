@@ -40,6 +40,13 @@ namespace GOOS_Sample.UnitTests
             AmountShouldBe(0, "2017-04-01", "2017-04-30");
         }
 
+        [Test]
+        public void three_years()
+        {
+            MakeBudgetList(MakeBudget("2018-04", 600));
+            AmountShouldBe(600, "2017-04-01", "2019-04-30");
+        }
+
         private void AmountShouldBe(int expected, string start, string end)
         {
             Assert.AreEqual(expected, Calculate(start, end));
