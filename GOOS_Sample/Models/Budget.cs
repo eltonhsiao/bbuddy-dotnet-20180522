@@ -26,5 +26,15 @@ namespace GOOS_Sample.Models
                 return DateTime.DaysInMonth(year, Month);
             }
         }
+
+        public DateTime StartOfBudget()
+        {
+            return DateTime.ParseExact(YearMonth + "-01", "yyyy-MM-dd", null);
+        }
+
+        public DateTime EndOfBudget()
+        {
+            return DateTime.ParseExact(YearMonth + "-" + DaysInMonth, "yyyy-MM-dd", null);
+        }
     }
 }

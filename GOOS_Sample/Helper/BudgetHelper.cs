@@ -16,8 +16,8 @@ namespace GOOS_Sample.Helper
             foreach (var budget in budgetList)
             {
                 var daysInMonth = budget.DaysInMonth;
-                var startOfBudget = DateTime.ParseExact(budget.YearMonth + "-01", "yyyy-MM-dd", null);
-                var endOfBudget = DateTime.ParseExact(budget.YearMonth + "-" + daysInMonth, "yyyy-MM-dd", null);
+                var startOfBudget = budget.StartOfBudget();
+                var endOfBudget = budget.EndOfBudget();
                 var averageEachDay = (decimal)budget.Amount / daysInMonth;
                 int totalDay;
 
