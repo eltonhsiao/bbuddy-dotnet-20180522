@@ -14,7 +14,7 @@ namespace GOOS_Sample.Helper
 
             foreach (var budget in budgetList)
             {
-                total += budget.DailyAmount() * dateRange.OverlappingDays(budget.DateRange);
+                total += budget.OverlappingAmount(dateRange);
             }
 
             return total;

@@ -47,5 +47,10 @@ namespace GOOS_Sample.Models
         {
             return (decimal) Amount / DaysInMonth;
         }
+
+        public decimal OverlappingAmount(DateRange dateRange)
+        {
+            return DailyAmount() * dateRange.OverlappingDays(DateRange);
+        }
     }
 }
