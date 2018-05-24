@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 
 namespace GOOS_Sample.Models
 {
@@ -8,7 +8,15 @@ namespace GOOS_Sample.Models
 
         public long Amount { get; set; }
 
-        private int DaysInMonth => DateTime.DaysInMonth(DateRange.Start.Year, DateRange.Start.Month);
+        public int DaysInMonth
+        {
+            get
+            {
+                var year = Convert.ToInt32(YearMonth.Substring(0, 4));
+                var month = Convert.ToInt32(YearMonth.Substring(YearMonth.Length - 2));
+                return DateTime.DaysInMonth(year, month);
+            }
+        }
 
         private DateRange DateRange => new DateRange
         {
