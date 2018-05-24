@@ -8,25 +8,20 @@ namespace GOOS_Sample.Models
 
         public long Amount { get; set; }
 
-        public int DaysInMonth
-        {
-            get
-            {
-                var year = Convert.ToInt32(YearMonth.Substring(0, 4));
-                var month = Convert.ToInt32(YearMonth.Substring(YearMonth.Length - 2));
-                return DateTime.DaysInMonth(year, month);
-            }
-        }
-
         private DateRange DateRange => new DateRange
         {
-            Start = DateTime.ParseExact(YearMonth + "-01", "yyyy-MM-dd", null),
-            End = DateTime.ParseExact(YearMonth + "-" + DaysInMonth, "yyyy-MM-dd", null)
+            Start = StartOfBudget(),
+            End = StartOfBudget().AddMonths(1).AddDays(-1)
         };
+
+        private DateTime StartOfBudget()
+        {
+            return DateTime.ParseExact(YearMonth + "-01", "yyyy-MM-dd", null);
+        }
 
         private decimal DailyAmount()
         {
-            return (decimal) Amount / DaysInMonth;
+            return (decimal) Amount / DateRange.DayCount();
         }
 
         public decimal OverlappingAmount(DateRange dateRange)

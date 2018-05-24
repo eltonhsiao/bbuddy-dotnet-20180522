@@ -18,5 +18,10 @@ namespace GOOS_Sample.Models
 
             return (overlappingEnd - overlappingStart).Days + 1;
         }
+
+        public int DayCount()
+        {
+            return DateTime.DaysInMonth(Start.Year, Start.Month);
+        }
     }
 }
