@@ -27,6 +27,12 @@ namespace GOOS_Sample.Models
             }
         }
 
+        public DateRange DateRange => new DateRange
+        {
+            Start = StartOfBudget(),
+            End = EndOfBudget()
+        };
+
         public DateTime StartOfBudget()
         {
             return DateTime.ParseExact(YearMonth + "-01", "yyyy-MM-dd", null);
