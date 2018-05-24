@@ -36,5 +36,10 @@ namespace GOOS_Sample.Models
         {
             return DateTime.ParseExact(YearMonth + "-" + DaysInMonth, "yyyy-MM-dd", null);
         }
+
+        public decimal DailyAmount()
+        {
+            return (decimal) Amount / DaysInMonth;
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace GOOS_Sample.Helper
                 var daysInMonth = budget.DaysInMonth;
                 var startOfBudget = budget.StartOfBudget();
                 var endOfBudget = budget.EndOfBudget();
-                var averageEachDay = (decimal)budget.Amount / daysInMonth;
+                var averageEachDay = budget.DailyAmount();
                 int totalDay;
 
                 if (dateRange.Start > endOfBudget || dateRange.End < startOfBudget)
