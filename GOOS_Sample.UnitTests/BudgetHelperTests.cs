@@ -57,103 +57,29 @@ namespace GOOS_Sample.UnitTests
         {
             MakeBudgetList(MakeBudget("2018-04", 600), MakeBudget("2018-05", 620));
 
-            var dateRange = new DateRange
-            {
-                Start = Convert.ToDateTime("2018-04-15"),
-                End = Convert.ToDateTime("2018-05-15")
-            };
-
-            var budgetList = new List<Budget>
-            {
-                new Budget()
-                {
-                    YearMonth = "2018-04",
-                    Amount = 600
-                },
-                new Budget()
-                {
-                    YearMonth = "2018-05",
-                    Amount = 620
-                }
-            };
-            var expected = 620;
-
-            var total = BudgetHelper.CalculateTotalBudget(dateRange, budgetList);
-
-            Assert.AreEqual(expected, total);
+            AmountShouldBe(620, "2018-04-15", "2018-05-15");
         }
 
         [Test]
         public void StartDate_And_EndDate_Are_Diff_Month_When_Decimal_Data()
         {
-            var dateRange = new DateRange
-            {
-                Start = Convert.ToDateTime("2018-02-01"),
-                End = Convert.ToDateTime("2018-06-30")
-            };
+            MakeBudgetList(
+                MakeBudget("2018-02", 990),
+                MakeBudget("2018-03", 990),
+                MakeBudget("2018-04", 990),
+                MakeBudget("2018-05", 990),
+                MakeBudget("2018-06", 990)
+            );
 
-            var budgetList = new List<Budget>
-            {
-                new Budget()
-                {
-                    YearMonth = "2018-02",
-                    Amount = 990
-                },
-                new Budget()
-                {
-                    YearMonth = "2018-03",
-                    Amount = 990
-                },
-                new Budget()
-                {
-                    YearMonth = "2018-04",
-                    Amount = 990
-                },
-                new Budget()
-                {
-                    YearMonth = "2018-05",
-                    Amount = 990
-                },
-                new Budget()
-                {
-                    YearMonth = "2018-06",
-                    Amount = 990
-                },
-            };
-            var expected = 4950;
-
-            var total = BudgetHelper.CalculateTotalBudget(dateRange, budgetList);
-
-            Assert.AreEqual(expected, total);
+            AmountShouldBe(4950, "2018-02-01", "2018-06-30");
         }
 
         [Test]
         public void StartDate_And_EndDate_Are_Diff_Month_With_Empty_MonthAndData()
         {
-            var dateRange = new DateRange
-            {
-                Start = Convert.ToDateTime("2018-04-15"),
-                End = Convert.ToDateTime("2018-06-30")
-            };
+            MakeBudgetList(MakeBudget("2018-04", 600), MakeBudget("2018-05", 620));
 
-            var budgetList = new List<Budget>
-            {
-                new Budget()
-                {
-                    YearMonth = "2018-04",
-                    Amount = 600
-                },
-                new Budget()
-                {
-                    YearMonth = "2018-05",
-                    Amount = 620
-                }
-            };
-            var expected = 940;
-
-            var total = BudgetHelper.CalculateTotalBudget(dateRange, budgetList);
-
-            Assert.AreEqual(expected, total);
+            AmountShouldBe(940, "2018-04-15", "2018-06-30");
         }
 
         [Test]
@@ -167,25 +93,9 @@ namespace GOOS_Sample.UnitTests
         [Test]
         public void StartDate_And_EndDate_Are_Same_Month_With_Partial_Month()
         {
-            var dateRange = new DateRange
-            {
-                Start = Convert.ToDateTime("2018-04-15"),
-                End = Convert.ToDateTime("2018-04-30")
-            };
+            MakeBudgetList(MakeBudget("2018-04", 600));
 
-            var budgetList = new List<Budget>
-            {
-                new Budget()
-                {
-                    YearMonth = "2018-04",
-                    Amount = 600
-                }
-            };
-            var expected = 320;
-
-            var total = BudgetHelper.CalculateTotalBudget(dateRange, budgetList);
-
-            Assert.AreEqual(expected, total);
+            Assert.AreEqual(320, Calculate("2018-04-15", "2018-04-30"));
         }
 
         private decimal Calculate(string start, string end)
