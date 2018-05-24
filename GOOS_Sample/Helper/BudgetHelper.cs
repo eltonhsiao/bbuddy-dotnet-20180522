@@ -14,36 +14,10 @@ namespace GOOS_Sample.Helper
 
             foreach (var budget in budgetList)
             {
-                total += budget.DailyAmount() * OverlappingDays(dateRange, budget.DateRange);
+                total += budget.DailyAmount() * dateRange.OverlappingDays(budget.DateRange);
             }
 
             return total;
-        }
-
-        private static int OverlappingDays(DateRange dateRange, DateRange range)
-        {
-            if (dateRange.Start > range.End || dateRange.End < range.Start)
-            {
-                return 0;
-            }
-
-            if (dateRange.Start.ToString("yyyyMM") == dateRange.End.ToString("yyyyMM"))
-            {
-                return (dateRange.End - dateRange.Start).Days + 1;
-            }
-
-            if (dateRange.Start.ToString("yyyyMM") == range.Start.ToString("yyyyMM"))
-            {
-                return (range.End - dateRange.Start).Days + 1;
-            }
-
-            if (dateRange.End.ToString("yyyyMM") == range.Start.ToString("yyyyMM"))
-            {
-                return (dateRange.End - range.Start).Days + 1;
-            }
-
-            return (range.End - range.Start).Days + 1;
-
         }
     }
 }
