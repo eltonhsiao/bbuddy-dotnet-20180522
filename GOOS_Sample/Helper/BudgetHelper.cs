@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using GOOS_Sample.Controllers;
@@ -15,37 +14,38 @@ namespace GOOS_Sample.Helper
 
             foreach (var budget in budgetList)
             {
-                var daysInMonth = budget.DaysInMonth;
-                var startOfBudget = budget.StartOfBudget();
-                var endOfBudget = budget.EndOfBudget();
-                var averageEachDay = budget.DailyAmount();
-                int totalDay;
-
-                if (dateRange.Start > endOfBudget || dateRange.End < startOfBudget)
-                {
-                    totalDay = 0;
-                }
-                else if (dateRange.Start.ToString("yyyyMM") == dateRange.End.ToString("yyyyMM"))
-                {
-                    totalDay = (dateRange.End.Day - dateRange.Start.Day + 1);
-                }
-                else if (dateRange.Start.ToString("yyyyMM") == startOfBudget.ToString("yyyyMM"))
-                {
-                    totalDay = (daysInMonth - dateRange.Start.Day + 1);
-                }
-                else if (dateRange.End.ToString("yyyyMM") == startOfBudget.ToString("yyyyMM"))
-                {
-                    totalDay = dateRange.End.Day;
-                }
-                else
-                {
-                    totalDay = daysInMonth;
-                }
-
-                total += averageEachDay * totalDay;
+                total += budget.DailyAmount() * TotalDay(dateRange, budget);
             }
 
             return total;
+        }
+
+        private static int TotalDay(DateRange dateRange, Budget budget)
+        {
+            int totalDay;
+
+            if (dateRange.Start > budget.EndOfBudget() || dateRange.End < budget.StartOfBudget())
+            {
+                totalDay = 0;
+            }
+            else if (dateRange.Start.ToString("yyyyMM") == dateRange.End.ToString("yyyyMM"))
+            {
+                totalDay = (dateRange.End.Day - dateRange.Start.Day + 1);
+            }
+            else if (dateRange.Start.ToString("yyyyMM") == budget.StartOfBudget().ToString("yyyyMM"))
+            {
+                totalDay = (budget.DaysInMonth - dateRange.Start.Day + 1);
+            }
+            else if (dateRange.End.ToString("yyyyMM") == budget.StartOfBudget().ToString("yyyyMM"))
+            {
+                totalDay = dateRange.End.Day;
+            }
+            else
+            {
+                totalDay = budget.DaysInMonth;
+            }
+
+            return totalDay;
         }
     }
 }
