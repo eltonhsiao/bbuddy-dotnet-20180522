@@ -15,25 +15,8 @@ namespace GOOS_Sample.Models
                 return 0;
             }
 
-            var overlappingStart = Start;
-            var overlappingEnd = End;
-
-            if (Start.ToString("yyyyMM") == End.ToString("yyyyMM"))
-            {
-            }
-            else if (Start.ToString("yyyyMM") == another.Start.ToString("yyyyMM"))
-            {
-                overlappingEnd = another.End;
-            }
-            else if (End.ToString("yyyyMM") == another.Start.ToString("yyyyMM"))
-            {
-                overlappingStart = another.Start;
-            }
-            else
-            {
-                overlappingStart = another.Start;
-                overlappingEnd = another.End;
-            }
+            var overlappingStart = Start > another.Start ? Start : another.Start;
+            var overlappingEnd = End < another.End ? End : another.End;
 
             return (overlappingEnd - overlappingStart).Days + 1;
         }
