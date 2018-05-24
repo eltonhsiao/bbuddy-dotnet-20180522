@@ -13,14 +13,12 @@ namespace GOOS_Sample.Helper
         {
             decimal total = 0;
 
-            foreach (var b in budgetList)
+            foreach (var budget in budgetList)
             {
-                var month = Convert.ToInt32(b.YearMonth.Substring(b.YearMonth.Length - 2));
-                var year = Convert.ToInt32(b.YearMonth.Substring(0, 4));
-                var daysInMonth = DateTime.DaysInMonth(year, month);
-                var startOfBudget = DateTime.ParseExact(b.YearMonth + "-01", "yyyy-MM-dd", null);
-                var endOfBudget = DateTime.ParseExact(b.YearMonth + "-" + daysInMonth, "yyyy-MM-dd", null);
-                var averageEachDay = (decimal)b.Amount / daysInMonth;
+                var daysInMonth = budget.DaysInMonth;
+                var startOfBudget = DateTime.ParseExact(budget.YearMonth + "-01", "yyyy-MM-dd", null);
+                var endOfBudget = DateTime.ParseExact(budget.YearMonth + "-" + daysInMonth, "yyyy-MM-dd", null);
+                var averageEachDay = (decimal)budget.Amount / daysInMonth;
                 int totalDay;
 
                 if (dateRange.Start > endOfBudget || dateRange.End < startOfBudget)
