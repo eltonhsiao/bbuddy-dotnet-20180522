@@ -22,30 +22,28 @@ namespace GOOS_Sample.Helper
 
         private static int TotalDay(DateRange dateRange, Budget budget)
         {
-            int totalDay;
-
             if (dateRange.Start > budget.EndOfBudget() || dateRange.End < budget.StartOfBudget())
             {
-                totalDay = 0;
-            }
-            else if (dateRange.Start.ToString("yyyyMM") == dateRange.End.ToString("yyyyMM"))
-            {
-                totalDay = (dateRange.End.Day - dateRange.Start.Day + 1);
-            }
-            else if (dateRange.Start.ToString("yyyyMM") == budget.StartOfBudget().ToString("yyyyMM"))
-            {
-                totalDay = (budget.DaysInMonth - dateRange.Start.Day + 1);
-            }
-            else if (dateRange.End.ToString("yyyyMM") == budget.StartOfBudget().ToString("yyyyMM"))
-            {
-                totalDay = dateRange.End.Day;
-            }
-            else
-            {
-                totalDay = budget.DaysInMonth;
+                return 0;
             }
 
-            return totalDay;
+            if (dateRange.Start.ToString("yyyyMM") == dateRange.End.ToString("yyyyMM"))
+            {
+                return (dateRange.End.Day - dateRange.Start.Day + 1);
+            }
+
+            if (dateRange.Start.ToString("yyyyMM") == budget.StartOfBudget().ToString("yyyyMM"))
+            {
+                return (budget.DaysInMonth - dateRange.Start.Day + 1);
+            }
+
+            if (dateRange.End.ToString("yyyyMM") == budget.StartOfBudget().ToString("yyyyMM"))
+            {
+                return dateRange.End.Day;
+            }
+
+            return budget.DaysInMonth;
+
         }
     }
 }
