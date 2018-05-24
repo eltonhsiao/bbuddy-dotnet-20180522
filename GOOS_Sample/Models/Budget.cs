@@ -8,42 +8,15 @@ namespace GOOS_Sample.Models
 
         public long Amount { get; set; }
 
-        public int Month
-        {
-            get { return Convert.ToInt32(YearMonth.Substring(YearMonth.Length - 2)); }
-        }
+        private int DaysInMonth => DateTime.DaysInMonth(DateRange.Start.Year, DateRange.Start.Month);
 
-        public decimal AverageBudget
+        private DateRange DateRange => new DateRange
         {
-            get { return (decimal)Amount / DaysInMonth; }
-        }
-
-        public int DaysInMonth
-        {
-            get
-            {
-                var year = Convert.ToInt32(YearMonth.Substring(0, 4));
-                return DateTime.DaysInMonth(year, Month);
-            }
-        }
-
-        public DateRange DateRange => new DateRange
-        {
-            Start = StartOfBudget(),
-            End = EndOfBudget()
+            Start = DateTime.ParseExact(YearMonth + "-01", "yyyy-MM-dd", null),
+            End = DateTime.ParseExact(YearMonth + "-" + DaysInMonth, "yyyy-MM-dd", null)
         };
 
-        public DateTime StartOfBudget()
-        {
-            return DateTime.ParseExact(YearMonth + "-01", "yyyy-MM-dd", null);
-        }
-
-        public DateTime EndOfBudget()
-        {
-            return DateTime.ParseExact(YearMonth + "-" + DaysInMonth, "yyyy-MM-dd", null);
-        }
-
-        public decimal DailyAmount()
+        private decimal DailyAmount()
         {
             return (decimal) Amount / DaysInMonth;
         }

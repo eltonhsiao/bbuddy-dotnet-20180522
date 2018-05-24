@@ -11,9 +11,7 @@ namespace GOOS_Sample.Models
         public int OverlappingDays(DateRange another)
         {
             if (Start > another.End || End < another.Start)
-            {
                 return 0;
-            }
 
             var overlappingStart = Start > another.Start ? Start : another.Start;
             var overlappingEnd = End < another.End ? End : another.End;
